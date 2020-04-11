@@ -1,0 +1,68 @@
+﻿Build1=Default,b4a.example
+File1=1.bal
+FileGroup1=Default Group
+Group=Default Group
+Library1=core
+Library2=exoplayer
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=1
+NumberOfLibraries=2
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: B4A Example
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	Private player1 As SimpleExoPlayer
+End Sub
+
+Sub Globals
+	Private SimpleExoPlayerView1 As SimpleExoPlayerView
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	If FirstTime Then
+		player1.Initialize("player")
+		Dim sources As List
+		sources.Initialize
+		sources.Add(player1.CreateUriSource("https://r5---sn-30a7rn76.googlevideo.com/videoplayback?expire=1586609068&ei=TGeRXrbiKIffgAfov45w&ip=156.202.245.33&id=o-AJ052r3INdrD_gt_jeR8TiUK6ILBEvFSGcVLofpJH6Px&itag=22&source=youtube&requiressl=yes&vprv=1&mime=video%2Fmp4&ratebypass=yes&dur=335.458&lmt=1537652280179019&fvip=5&c=WEB&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cratebypass%2Cdur%2Clmt&sig=AJpPlLswRAIgSnp3fachscHE9Vxo3nKE-V7DXKLTlK1Q-7im21p4B8ICIEGy3vpsdP2MbJ8hNKxA8pdr55OAtO-u_0OMklERc4Iw&contentlength=23296973&video_id=OfOMEP_7AJM&title=The+History+of+Thailand+Explained+in+5+minutes&rm=sn-uxaxjvhxbt2u-amgl7s,sn-hgnls7z&req_id=d413f6f15574a3ee&redirect_counter=2&cms_redirect=yes&ipbypass=yes&mh=Po&mip=103.25.243.172&mm=29&mn=sn-30a7rn76&ms=rdu&mt=1586587411&mv=m&mvi=4&pl=24&lsparams=ipbypass,mh,mip,mm,mn,ms,mv,mvi,pl&lsig=ALrAebAwRgIhAJcILO5Q4891C04oyWyjBftOxcm5UVfANlwCC0kJKYYuAiEA0oCtinrAcaxuyNYcUPDFfAMdH6SuBHLKxEx_3J4XqIk%3D"))
+		player1.Prepare(player1.CreateListSource(sources))
+		
+	End If
+	Activity.LoadLayout("1")
+	SimpleExoPlayerView1.Player = player1
+	player1.Play
+End Sub
+
+Sub Player_Ready
+	Log("Ready")
+End Sub
+
+Sub Player_Error (Message As String)
+	Log("Error: " & Message)
+End Sub
+
+Sub Player_Complete
+	Log("complete")
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
